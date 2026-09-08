@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------
+# dependencies
+# ---------------------------------------------------------------
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# ---------------------------------------------------------------
+# build output
+# ---------------------------------------------------------------
+/.next/
+/out/
+/build
+/coverage
+*.tsbuildinfo
+next-env.d.ts
+
+# ---------------------------------------------------------------
+# env + deploy
+# ---------------------------------------------------------------
+.env*
+.vercel
+
+# ---------------------------------------------------------------
+# logs and os junk
+# ---------------------------------------------------------------
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+.DS_Store
+Thumbs.db
+*.pem
+
+# ---------------------------------------------------------------
+# our working notes — internal, not part of the submission
+#
+# These are how the build was run, not how the game works. The plan, the
+# progress log and the agent instructions carry competitor notes and
+# scheduling that has no business in a public repo.
+# ---------------------------------------------------------------
+MASTER-PLAN.md
+PROGRESS.md
+CLAUDE.md
+AGENTS.md
+ART.md
+
+# CASES.md is the answer key. It says in plain English which six photos are
+# evidence, which are traps and why. Shipping it hands a reader the solution
+# before they ever play.
+CASES.md
+
+# ---------------------------------------------------------------
+# working art
+#
+# Raw model downloads, unprocessed generations, contact sheets and concept
+# art — 260MB+ of source material that never ships. Everything the game
+# actually loads lives in public/ and IS committed.
+# ---------------------------------------------------------------
+/art-raw
+
+# ---------------------------------------------------------------
+# throwaway from driving the browser
+# ---------------------------------------------------------------
+/.playwright-mcp
+/room-*.png
+/lab-*.png
+/gpt-*.png
+*.zip
+
+# ---------------------------------------------------------------
+# NOT ignored, on purpose:
+#
+#   CREDITS.md       most of the 3D models are CC BY, which requires
+#                    attribution. This file has to ship with the code.
+#   README.md        the challenge scores it directly.
+#   public/models    the game cannot load without them.
+#   public/cases     the 14 case photos and case.json.
+#   public/room      cork, window view, posters.
+#   public/textures  wall and floor.
+#   scripts/         how every asset was made and processed — part of
+#                    showing the work.
+# ---------------------------------------------------------------

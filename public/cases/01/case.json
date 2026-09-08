@@ -1,0 +1,159 @@
+{
+  "id": "01",
+  "title": "The Bait Shop That Never Opens",
+  "place": "Port Gellhorn",
+  "brief": "A bait shop at the Port Gellhorn marina. Closed since March. Nobody has bought a shiner there in six months. But the lights come on at night and the boat still goes out. I have been watching it for three weeks. Tell me I am crazy.",
+  "photos": [
+    {
+      "id": "boat-night",
+      "src": "/cases/01/boat-night.jpg",
+      "caption": "2:41am. Same boat. Every time.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "rod-holders",
+          "rect": [0.34, 0.45, 0.53, 0.15],
+          "clue": "Six rod holders. All empty. Nobody fishes with no rods."
+        },
+        {
+          "id": "waterline",
+          "rect": [0.28, 0.72, 0.58, 0.13],
+          "clue": "She is sitting low. That boat is carrying something heavy."
+        }
+      ]
+    },
+    {
+      "id": "ice-receipt",
+      "src": "/cases/01/ice-receipt.jpg",
+      "caption": "Found this on the seat. Did not go looking for it.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "ice-order",
+          "rect": [0.42, 0.43, 0.26, 0.14],
+          "clue": "Four hundred pounds of ice. Every week. For a shop that sells nothing."
+        }
+      ]
+    },
+    {
+      "id": "cooler-truck",
+      "src": "/cases/01/cooler-truck.jpg",
+      "caption": "Round the back. Three nights running.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "reefer-unit",
+          "rect": [0.63, 0.08, 0.33, 0.22],
+          "clue": "The truck is running its cooler. At a shop that has been shut since March."
+        }
+      ]
+    },
+    {
+      "id": "shop-cars",
+      "src": "/cases/01/shop-cars.jpg",
+      "caption": "Nobody at this marina drives cars like that.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "clean-cars",
+          "rect": [0.24, 0.45, 0.75, 0.38],
+          "clue": "Two cars nobody at this marina can afford, parked at a closed shop, at night."
+        }
+      ]
+    },
+    {
+      "id": "shop-closed",
+      "src": "/cases/01/shop-closed.jpg",
+      "caption": "Closed since March. Look past the glass.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "clean-floor",
+          "rect": [0.32, 0.56, 0.36, 0.35],
+          "clue": "That sign has not moved in months. But the floor inside is clean."
+        }
+      ]
+    },
+    {
+      "id": "fuel-log",
+      "src": "/cases/01/fuel-log.jpg",
+      "caption": "They leave it hanging right there on the post.",
+      "evidence": true,
+      "hotspots": [
+        {
+          "id": "night-fuelling",
+          "rect": [0.31, 0.43, 0.36, 0.11],
+          "clue": "Fuelled at 3:14 in the morning. Twice this week."
+        }
+      ]
+    },
+    {
+      "id": "pelican",
+      "src": "/cases/01/pelican.jpg",
+      "caption": "He is always there. I do not think he is involved.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "sunset",
+      "src": "/cases/01/sunset.jpg",
+      "caption": "Nice one, actually.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "parking-ticket",
+      "src": "/cases/01/parking-ticket.jpg",
+      "caption": "Somebody is having a worse week than me.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "lost-dog",
+      "src": "/cases/01/lost-dog.jpg",
+      "caption": "Been up since February. Hope they found him.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "jetski",
+      "src": "/cases/01/jetski.jpg",
+      "caption": "Has not moved in a month. Checked.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "fish-board",
+      "src": "/cases/01/fish-board.jpg",
+      "caption": "Somebody has been cleaning fish. Somebody.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "tourists",
+      "src": "/cases/01/tourists.jpg",
+      "caption": "Wrong dock, wrong day. Just people.",
+      "evidence": false,
+      "hotspots": []
+    },
+    {
+      "id": "storm",
+      "src": "/cases/01/storm.jpg",
+      "caption": "Blew in Thursday. Nothing went out that night.",
+      "evidence": false,
+      "hotspots": []
+    }
+  ],
+  "chain": [
+    "boat-night",
+    "ice-receipt",
+    "cooler-truck",
+    "shop-cars",
+    "shop-closed",
+    "fuel-log"
+  ],
+  "endings": {
+    "win": "The shop has not sold a shiner since March.\n\nThe boat goes out empty and comes back heavy. The ice was never for fish — it was for keeping something cold on a truck heading north on the 27.\n\nCoast Guard stopped it outside Grassrivers on a Tuesday.\n\nYou were right, Cal. You are usually right. That is the problem.",
+    "lost": "You put it on the pelican.\n\nThe marina laughed. The Coast Guard stopped taking your calls. The truck ran that route for another two years, and the shop never opened once.\n\nNobody listens to the guy who cried bird."
+  }
+}
