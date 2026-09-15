@@ -68,6 +68,11 @@ CASES.md
 # throwaway from driving the browser
 # ---------------------------------------------------------------
 /.playwright-mcp
+
+# Playwright MCP is pinned to this project so the browser connects reliably, but
+# it points at a Windows user profile on this machine — not something to ship in
+# a public repo.
+/.mcp.json
 /room-*.png
 /lab-*.png
 /gpt-*.png

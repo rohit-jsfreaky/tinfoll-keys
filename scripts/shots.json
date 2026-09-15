@@ -1,0 +1,95 @@
+{
+  "_comment": "Case 2 photo manifest. The style block is deliberately anti-synthwave: modern sun-weathered Florida, amber sodium rather than magenta neon, and an amateur phone camera held inside a parked car. Times of day are mixed on purpose — the daylight frames are what make the night ones read as GTA VI rather than as an eighties album cover.",
+  "setting": "A run-down 24-hour towing and impound yard behind a faded stucco strip mall in modern South Florida: chain-link fence with green privacy slats, a portable office trailer with a rusting window air-conditioning unit, concrete utility poles carrying tangled overhead cables, lifted pickup trucks, tow rigs, and wrecked and impounded cars packed tightly in rows.",
+  "light": {
+    "night": "Humid night. Harsh amber sodium-vapour floodlights mixed with ugly cool-white fluorescent spill from the office trailer, mosquito haze hanging around the lamps, deep shadows. Only a small amount of distant neon, far away.",
+    "dusk": "Late dusk, the sky orange going to purple, the yard floodlights just coming on, everything slightly too warm.",
+    "day": "Brutal midday Florida sun, blown-out white sky, bleached concrete, hard black shadows, heat shimmer."
+  },
+  "shots": [
+    {
+      "id": "twin-plates",
+      "time": "night",
+      "ts": "SEP 07 2026 11:26 PM",
+      "subject": "Two cars parked nose to tail in an impound row. They are obviously different cars — different colour, different model, different age — but they carry the SAME licence plate. The identical plate number is large and clearly readable on both: on the rear of the first car and on the front of the second. Frame both plates in the same shot."
+    },
+    {
+      "id": "stripped-car",
+      "time": "dusk",
+      "ts": "SEP 05 2026 8:10 PM",
+      "subject": "A silver SUV standing in an impound row with every badge and emblem removed and its rear licence plate gone, leaving a clean empty rectangular recess with two bare bolt holes and slightly brighter unfaded paint where the plate used to sit. The empty plate recess is large in frame and clearly lit."
+    },
+    {
+      "id": "plate-stack",
+      "time": "night",
+      "ts": "SEP 07 2026 11:48 PM",
+      "subject": "Shot from outside through the open doorway of the portable office trailer. Hanging on a nail on the wall inside is a thick stack of a dozen identical temporary paper dealer licence plates, all printed the same. The stack is clearly visible under the bare fluorescent tube."
+    },
+    {
+      "id": "cut-vin",
+      "time": "day",
+      "ts": "SEP 08 2026 12:37 PM",
+      "subject": "A close shot through a car's windscreen at the bottom corner of the dashboard where the small metal VIN plate should be. The plate has been cut out, leaving a clean rectangular hole with bare scratched metal and grey adhesive residue around it. The cut-out is large in frame."
+    },
+    {
+      "id": "container",
+      "time": "night",
+      "ts": "SEP 09 2026 1:02 AM",
+      "subject": "The back fence of the yard. A rusted shipping container with its doors part open, and the low nose of a bright orange supercar clearly visible inside it, lit by a single floodlight from the side."
+    },
+    {
+      "id": "night-tow",
+      "time": "night",
+      "ts": "SEP 10 2026 3:07 AM",
+      "subject": "A flatbed tow truck in the yard in the dead middle of the night with a pristine undamaged low supercar winched onto the bed — no crash damage anywhere, perfect paint, perfect wheels, nothing wrong with it at all. Two men in dark clothes stand at the winch, faces not visible."
+    },
+    {
+      "id": "luis-night",
+      "time": "night",
+      "ts": "SEP 11 2026 12:19 AM",
+      "subject": "An older Latino man in a grey work shirt crouched at the rear of a car in the impound row at night, using a screwdriver to take the licence plate off. He already holds one removed plate in his other hand. His face is turned mostly away. He looks exactly like a man doing something he should not be doing."
+    },
+    {
+      "id": "sofia-flyer",
+      "time": "day",
+      "ts": "SEP 02 2026 1:31 PM",
+      "subject": "A home-printed missing-vehicle flyer taped to a concrete utility pole, sun-faded and curling at the corners. It reads STOLEN in big plain letters at the top, and below it a photograph of a small blue hatchback. Hanging from that car's rear-view mirror in the photograph is a small bright pink plastic flamingo, small but clearly visible."
+    },
+    {
+      "id": "flamingo-car",
+      "time": "night",
+      "ts": "SEP 11 2026 12:44 AM",
+      "subject": "A small blue hatchback parked in the impound row at night, shot straight through its windscreen. Hanging from the rear-view mirror is a small bright pink plastic flamingo, clearly visible and well lit. The car's paint is sun-faded and tired but the licence plate on it is brand new and clean."
+    },
+    {
+      "id": "luis-notebook",
+      "time": "night",
+      "ts": "SEP 11 2026 1:05 AM",
+      "subject": "Shot from outside through the open door of the yard's staff room. A cheap spiral notebook lies open on a bench under a fluorescent tube, its pages covered in rows of handwriting: dates, times and partial licence plate numbers. One plate number is written several times down the page and circled hard in pen."
+    },
+    {
+      "id": "locker-search",
+      "time": "night",
+      "ts": "SEP 11 2026 2:31 AM",
+      "subject": "Two men going through an open metal locker in the yard at night, its contents pulled out onto the concrete at their feet. A strip of masking tape stuck on the locker door has ORTEGA written on it in marker pen, clearly readable."
+    },
+    {
+      "id": "yard-dog",
+      "time": "dusk",
+      "ts": "SEP 03 2026 7:55 PM",
+      "subject": "A scruffy brown mongrel dog lying on the metal step of the portable office trailer at dusk, head up, looking straight at the camera. A chipped plastic bowl beside it. Ordinary and harmless."
+    },
+    {
+      "id": "day-yard",
+      "time": "day",
+      "ts": "SEP 02 2026 1:14 PM",
+      "subject": "IMPORTANT: this one is in BRIGHT MIDDAY SUNLIGHT, not at dusk and not at night. High sun almost overhead, blown-out white sky, no sunset colours anywhere, no orange sky, no floodlights on. The tow yard seen from across the road at lunchtime. Completely ordinary and legitimate: a customer in shorts and a cap signing a clipboard at the trailer window while a tow driver waits beside him. Nothing suspicious at all."
+    },
+    {
+      "id": "luis-lunch",
+      "time": "dusk",
+      "ts": "SEP 03 2026 7:42 PM",
+      "subject": "An older Latino man in a grey work shirt sitting alone on an upturned bucket behind the office trailer at dusk, eating from a plastic container balanced on his knee. Well away from everyone else. Quiet and a little sad."
+    }
+  ]
+}

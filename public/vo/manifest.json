@@ -1,0 +1,110 @@
+{
+ "intro": {
+  "ms": 13479,
+  "text": "[tired] I'm Cal. I live upstairs. I've been watching that yard for three weeks. Nobody asked me to. That's why I noticed it. Start with the file on the wall."
+ },
+ "story-1": {
+  "ms": 23719,
+  "text": "You work there, Mateo. That's why you're in my flat at one in the morning. I can see most of the yard from here, and the rest from my car. I'm not asking you to believe me. Just look."
+ },
+ "story-2": {
+  "ms": 28761,
+  "text": "A tow yard's where stolen cars are supposed to end up. I think this one sends them back out. Cars come in clean, then leave with new plates and new papers. I can't prove it. You know that yard better than I do."
+ },
+ "story-3": {
+  "ms": 28526,
+  "text": "I'm not telling you what to circle. That'd be useless. Look for stuff that doesn't fit. Same plate twice. A clean car on a tow truck. Dealer plates in a tow yard. Most of the photos are normal. Good. That makes the bad ones easier to spot."
+ },
+ "story-4": {
+  "ms": 20767,
+  "text": "There's an older guy in the grey shirt. He's around every time those cars move at night. I don't know him. You do. So you tell me what he's doing."
+ },
+ "story-5": {
+  "ms": 42606,
+  "text": "Fourteen photos. Open one, circle what looks wrong, then save it. If you're right, I'll tell you what I know. Pin the ones that matter. Use the string if it helps. When you're done, make one accusation. One sentence. Names included."
+ },
+ "clue-same-plate": {
+  "ms": 4833,
+  "text": "Same plate. Two different cars. Yeah, that's not normal."
+ },
+ "clue-no-plate": {
+  "ms": 5329,
+  "text": "Plate's gone. Badges too. That SUV came in with both."
+ },
+ "clue-dealer-plates": {
+  "ms": 3474,
+  "text": "A tow yard doesn't need a stack of dealer plates."
+ },
+ "clue-cut-vin": {
+  "ms": 5329,
+  "text": "Somebody cut the VIN plate out of the dash. That wasn't from a tow."
+ },
+ "clue-container-car": {
+  "ms": 4206,
+  "text": "There's a supercar in that container. That's not where impounds go."
+ },
+ "clue-clean-car": {
+  "ms": 4676,
+  "text": "Not a scratch on it. So why's it on a flatbed at three in the morning?"
+ },
+ "clue-luis": {
+  "ms": 4284,
+  "text": "Luis Ortega. Fifteen years at Sunstate."
+ },
+ "clue-sofia-car": {
+  "ms": 6113,
+  "text": "Sofia Ortega's car. Stolen in March. Never recovered."
+ },
+ "clue-same-flamingo": {
+  "ms": 6844,
+  "text": "Same pink flamingo. Same car. Different plate. It's been sitting in the yard."
+ },
+ "clue-notebook": {
+  "ms": 5146,
+  "text": "Dates, times, plate numbers. Luis has been writing it all down."
+ },
+ "clue-ortega-locker": {
+  "ms": 3788,
+  "text": "That's Luis's locker. They're searching it right after he leaves."
+ },
+ "win": {
+  "ms": 31556,
+  "text": "They got Victor in the office trailer with a drawer full of plates. Luis gave his statement first, so they treated him like a witness. Sofia's car's in evidence now. She'll get it back. We had the yard right. We nearly had Luis wrong."
+ },
+ "lost": {
+  "ms": 19566,
+  "text": "You put Luis next to Victor and that was enough. They picked them both up that night. Luis had spent months writing down plates because nobody believed him. Now his name's tied to Victor's, and Sofia's car is still sitting in evidence."
+ },
+ "yard-dirty": {
+  "ms": 6531,
+  "text": "[frustrated] Alright. The yard's dirty. We know that. I'm worried about the guy in the grey shirt."
+ },
+ "not-yet": {
+  "ms": 7314,
+  "text": "Not yet. There's still somebody in these photos I can't place. I'm not putting a name on this until you can."
+ },
+ "accuse-lead": {
+  "ms": 5799,
+  "text": "Alright. Say it properly. Once you put a name on this, you don't get to pretend you didn't."
+ },
+ "accuse-short": {
+  "ms": 5068,
+  "text": "[frustrated] No. Something in that doesn't hold up. Go back and look again."
+ },
+ "miss-1": {
+  "ms": 4362,
+  "text": "Nothing there. Try again, you lose nothing."
+ },
+ "miss-2": {
+  "ms": 1802,
+  "text": "Not that. Keep looking."
+ },
+ "pin-1": {
+  "ms": 1646,
+  "text": "Okay. Put it up."
+ },
+ "pin-2": {
+  "ms": 2926,
+  "text": "Yeah. That one stays."
+ }
+}

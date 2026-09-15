@@ -5,6 +5,43 @@
   --foreground: #171717;
 }
 
+/*
+ * The GTA palette — measured, not guessed.
+ *
+ * Taken by counting every pixel of all fourteen case photos and bucketing them
+ * by hue. What came back corrected two assumptions:
+ *
+ *   sodium orange   19.3%  the single biggest colour in the art
+ *   magenta         15.1%  the strip
+ *   electric blue   14.6%  neither cyan nor purple — its own hue at 210
+ *   cyan             9.2%  sign tubing
+ *
+ * and the dark half of those photos is a blue-black (#0f1527), not the brown or
+ * the violet used before. The UI had no orange and no blue in it at all, which
+ * is exactly why it did not look like the photos it sits next to.
+ *
+ * Three accents, used for three jobs, so the screens stay readable:
+ *   magenta  — what matters and what to press
+ *   cyan     — labels and structure
+ *   sodium   — numbers, counts, metadata
+ * Red is not in this list. It is reserved for consequence: wanted stars, the
+ * string, WASTED.
+ */
+:root {
+  --night-deep: #080b18;
+  --night: #12142a;
+  --night-raised: #1b1d36;
+
+  --neon-pink: #ff2f9e;
+  --neon-cyan: #2fc9f0;
+  --electric: #3b9bff;
+  --sodium: #f0932f;
+  --gold: #dab43f;
+
+  --paper: #efe7d8;
+  --wanted: #e5342a;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -23,4 +60,98 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/*
+ * The box of photos scrolls, and a default OS scrollbar sitting in the middle
+ * of a corkboard game looks like a bug. Same paper-on-dark palette as the rest.
+ */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(239, 231, 216, 0.28) transparent;
+}
+.thin-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.thin-scroll::-webkit-scrollbar-track {
+  background: rgba(239, 231, 216, 0.05);
+  border-radius: 4px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: rgba(239, 231, 216, 0.24);
+  border-radius: 4px;
+}
+.thin-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(163, 35, 29, 0.75);
+}
+.thin-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Same bar on the paper: ink on cream instead of paper on dark. */
+.thin-scroll-dark {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26, 23, 20, 0.25) transparent;
+}
+.thin-scroll-dark::-webkit-scrollbar {
+  width: 6px;
+}
+.thin-scroll-dark::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scroll-dark::-webkit-scrollbar-thumb {
+  background: rgba(26, 23, 20, 0.2);
+  border-radius: 3px;
+}
+.thin-scroll-dark::-webkit-scrollbar-thumb:hover {
+  background: rgba(163, 35, 29, 0.7);
+}
+
+/*
+ * Used by the loading screen caption, which re-enters every time the panel
+ * changes. Kept deliberately gentle: it is underneath a one-second crossfade,
+ * and anything snappier reads as a glitch rather than a change of subject.
+ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/*
+ * The loading screen's plate cycle.
+ *
+ * This is deliberately CSS and not a setInterval. The whole reason the loading
+ * screen exists is that the main thread is busy parsing 21MB of models, and a
+ * JS timer under that load simply does not fire — the first version of this
+ * sat on the same photograph for the entire load. A compositor animation keeps
+ * time no matter how blocked the main thread is.
+ *
+ * Four plates, one second each, so the cycle is four seconds. Each plate is
+ * held at opacity 0 by default and this brings it up for its own second, which
+ * means a positive animation-delay hides it until its turn comes round. The
+ * percentages below are quarters — they have to change if a plate is added.
+ */
+@keyframes plate {
+  0% {
+    opacity: 0;
+  }
+  3% {
+    opacity: 1;
+  }
+  22% {
+    opacity: 1;
+  }
+  28% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }

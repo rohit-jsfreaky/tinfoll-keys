@@ -15,16 +15,30 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
+import { BoardPins } from "./board-pins";
+import type { Marks } from "@/lib/marks";
+import { BoardStrings } from "./board-string";
+import { Interactive } from "./interaction";
 import { RoomProps } from "./props";
+import type { CaseFile } from "@/lib/case";
 import * as THREE from "three";
 
-/* Palette from ART.md. */
-const ROOM_DARK = "#171310";
-/* Deliberately cooler and darker than the cork. If the wall is warm too, the
- * board vanishes into it and stops reading as an object you can walk up to. */
-const WALL = "#282430";
-const FLOOR = "#2b2422";
-const WOOD = "#2a1d14";
+/*
+ * Leonida at 3am, not a basement.
+ *
+ * These were grey-brown, which is a horror palette: brown takes coloured light
+ * badly and turns it muddy, so the magenta and cyan in the room had nothing to
+ * land on. Counting the pixels of all fourteen case photos put the dark half of
+ * that art at #0f1527 — a blue-black, not a brown one — so these follow it. Still
+ * dark, because the board has to be the brightest thing in frame, but dark in
+ * colour rather than dark in mud.
+ *
+ * The wall stays cooler and darker than the cork on purpose. If the wall is warm
+ * too, the board vanishes into it and stops reading as an object.
+ */
+const ROOM_DARK = "#0f121f";
+const WALL = "#1e2236";
+const FLOOR = "#1d2030";
 const PAPER = "#efe7d8";
 
 const ROOM_W = 7;
@@ -53,12 +67,12 @@ function Window() {
       {/* frame */}
       <mesh position={[0, 0, 0.002]}>
         <planeGeometry args={[1.58, 1.88]} />
-        <meshStandardMaterial color="#15110d" roughness={0.9} />
+        <meshStandardMaterial color="#12141f" roughness={0.9} />
       </mesh>
       {/* one glazing bar, so it reads as a window and not a screen */}
       <mesh position={[0, 0, 0.008]}>
         <boxGeometry args={[0.028, 1.75, 0.02]} />
-        <meshStandardMaterial color="#15110d" roughness={0.9} />
+        <meshStandardMaterial color="#141326" roughness={0.9} />
       </mesh>
     </group>
   );
@@ -98,19 +112,21 @@ function Corkboard() {
  * The case file, pinned to the top left. This is the thing you click first.
  * It is only a shape for now — opening it comes next.
  */
-function CaseFilePaper() {
+function CaseFilePaper({ onOpen }: { onOpen: () => void }) {
   return (
-    <group position={[BOARD.x - 0.92, BOARD.y + 0.47, BOARD.z + 0.012]} rotation={[0, 0, -0.045]}>
+    <Interactive id="case-file" label="READ THE CASE" onSelect={onOpen}>
+      <group position={[BOARD.x - 1.78, BOARD.y + 0.05, -3.47]} rotation={[0, 0, -0.045]}>
       <mesh>
         <planeGeometry args={[0.4, 0.53]} />
         <meshStandardMaterial color={PAPER} roughness={0.9} />
       </mesh>
       {/* a pin holding it up */}
-      <mesh position={[0, 0.23, 0.012]}>
-        <sphereGeometry args={[0.014, 10, 10]} />
-        <meshStandardMaterial color="#a3231d" roughness={0.35} metalness={0.1} />
-      </mesh>
-    </group>
+        <mesh position={[0, 0.23, 0.012]}>
+          <sphereGeometry args={[0.014, 10, 10]} />
+          <meshStandardMaterial color="#a3231d" roughness={0.35} metalness={0.1} />
+        </mesh>
+      </group>
+    </Interactive>
   );
 }
 
@@ -174,7 +190,7 @@ function BoardLamp() {
         position={[0, 2.66, -1.4]}
         angle={0.88}
         penumbra={0.5}
-        intensity={20}
+        intensity={16}
         distance={7}
         decay={2}
         color="#ffdcb4"
@@ -196,31 +212,66 @@ function BoardLamp() {
   );
 }
 
-export function RoomScene() {
+export interface RoomSceneProps {
+  onOpenCase: () => void;
+  onOpenBox: () => void;
+  file: CaseFile | null;
+  pinned: string[];
+  found: string[];
+  links: Array<[string, string]>;
+  held: string | null;
+  onPick: (photoId: string) => void;
+  /** The player's drawn-on copies, so the board shows their work. */
+  marks: Marks;
+  onInspect: (photoId: string) => void;
+  /** How much of the room has been allowed to mount yet. */
+  tier: number;
+}
+
+export function RoomScene({ onOpenCase, onOpenBox, file, pinned, found, links, held, onPick, marks, onInspect, tier }: RoomSceneProps) {
   return (
     <>
       {/* Horror lights a room with one warm bulb and lets the rest go black.
-        * Leonida at 3am is humid and full of colour, so the fill is a cold
-        * magenta and the shadows keep some life in them. */}
-      <ambientLight intensity={0.42} color="#9d80c0" />
-      <hemisphereLight args={["#ff6ea8", "#2a8f9c", 0.8]} />
+        * Leonida at 1am is humid and full of colour, so the shadows keep some
+        * life in them: sodium from above, a cold blue bounce off the floor. The
+        * ambient is pulled back so the coloured lights do the work instead of a
+        * flat grey lift sitting on top of everything. */}
+      <ambientLight intensity={0.24} color="#6f7ba8" />
+      <hemisphereLight args={["#ffa04a", "#3b6dbf", 0.55]} />
 
       <BoardLamp />
 
       {/* desk lamp, off to the left */}
       <pointLight position={[-1.35, 0.95, -2.05]} intensity={2.6} distance={2.8} decay={2} color="#ffb457" />
-      {/* The neon is not a detail in the window, it is a light source that
-        * reaches across the whole room. This is the difference between "dark
-        * room" and "Vice City at 3am". */}
-      <pointLight position={[2.3, 2.0, -2.5]} intensity={26} distance={9} decay={1.8} color="#ff3d7f" />
-      <pointLight position={[1.6, 1.5, -2.3]} intensity={12} distance={7} decay={1.8} color="#2ee6c1" />
-      {/* a second sign somewhere off to the left, out of shot */}
-      <pointLight position={[-2.6, 2.2, -0.6]} intensity={14} distance={8} decay={1.8} color="#2ee6c1" />
+      {/*
+        * What comes in off the street, and it is the biggest light in the room.
+        *
+        * This used to be magenta, which made the flat read as a nightclub. The
+        * street outside is the same street the photographs were taken in, and
+        * every one of those is lit by amber sodium — so this is sodium too. The
+        * neon in this room now comes only from the two LED strips Cal put up
+        * himself, which is the right amount of neon for a man living alone.
+        */}
+      <pointLight position={[2.3, 2.0, -2.5]} intensity={21} distance={8} decay={2} color="#ffa24a" />
+      {/* The cyan fill comes from the hemisphere light and the left strip now;
+        * two more point lights for it were pure cost. */}
 
       <Shell />
       <Corkboard />
-      <CaseFilePaper />
-      <RoomProps />
+      {file && (
+        <BoardPins
+          file={file}
+          pinned={pinned}
+          found={found}
+          held={held}
+          marks={marks}
+          onPick={onPick}
+          onInspect={onInspect}
+        />
+      )}
+      {file && <BoardStrings pinned={pinned} links={links} />}
+      <CaseFilePaper onOpen={onOpenCase} />
+      <RoomProps onOpenBox={onOpenBox} tier={tier} />
     </>
   );
 }

@@ -15,7 +15,7 @@
 import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useFBX, useGLTF } from "@react-three/drei";
-import { ALL_GLB, HALF_D, HALF_W } from "./models";
+import { HALF_D, HALF_W } from "./models";
 import * as THREE from "three";
 
 export type PropAnchor = "bottom" | "top" | "centre";
@@ -101,6 +101,8 @@ export interface PropProps {
   gap?: number;
   /** Radians per second. Only the ceiling fan uses this. */
   spinY?: number;
+  /** Runs once on the loaded copy, for material fixes a model ships wrong. */
+  tweak?: (root: THREE.Object3D) => void;
 }
 
 export function Prop({
@@ -114,6 +116,7 @@ export function Prop({
   wall,
   gap = 0.04,
   spinY = 0,
+  tweak,
 }: PropProps) {
   const { scene } = useGLTF(url);
   const spinner = useRef<THREE.Group>(null);
@@ -121,7 +124,11 @@ export function Prop({
   const [sx, sy, sz] = Array.isArray(scale) ? scale : [scale, scale, scale];
 
   const { node, size } = useMemo(
-    () => shape(scene, { scale, rotation, anchor, fitHeight, fitLongest }),
+    () => {
+      const shaped = shape(scene, { scale, rotation, anchor, fitHeight, fitLongest });
+      tweak?.(shaped.node);
+      return shaped;
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [scene, sx, sy, sz, rx, ry, rz, anchor, fitHeight, fitLongest],
   );
@@ -235,4 +242,14 @@ export function FbxProp({
   );
 }
 
-ALL_GLB.forEach((u) => useGLTF.preload(u));
+/**
+ * Deliberately NOT preloading everything here.
+ *
+ * A blanket preload at module scope fires all 41 downloads the instant the page
+ * imports this file, which is what made the first few seconds stutter. The
+ * scene mounts in tiers instead (see Boot / useLoadTiers) and Suspense pulls
+ * each model in as its tier appears.
+ */
+export function preload(urls: readonly string[]) {
+  urls.forEach((u) => useGLTF.preload(u));
+}

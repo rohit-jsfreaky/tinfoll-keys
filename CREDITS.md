@@ -100,3 +100,10 @@ Every downloaded model was reprocessed with `@gltf-transform/cli` before shippin
 textures resized to 1024px (512px for small props) and re-encoded to WebP, geometry
 simplified on the heaviest props. The raw downloads totalled **264MB**; the shipped
 models total **17MB**. Original files are kept out of the repo in `art-raw/`.
+
+## Voice
+
+Cal is spoken by **ElevenLabs** (Eleven v3), using the *Michael - Gruff and Serious*
+voice from their library. The 24 lines in `public/vo` were generated for this project and
+level-matched by `scripts/process-vo.py`. Nothing is synthesised while the game runs —
+the mp3s ship with it.

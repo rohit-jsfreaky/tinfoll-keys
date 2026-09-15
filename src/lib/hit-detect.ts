@@ -17,6 +17,21 @@ export interface Hotspot {
   id: string;
   rect: Rect;
   clue?: string;
+  /**
+   * What a hint says about this one.
+   *
+   * Describes the object, never a position on screen — "look at what's in his
+   * hand", not "top right". The player still has to find it and still has to
+   * draw on it, which is the whole game.
+   */
+  hint?: string;
+  /**
+   * This hotspot is a second way to point at another one, so it borrows that
+   * one's voice line rather than needing its own recording. Both plates in
+   * twin-plates are the same discovery; Cal should not say it differently
+   * depending on which one you circled.
+   */
+  voiceAs?: string;
 }
 
 export interface DetectOptions {
@@ -26,7 +41,9 @@ export interface DetectOptions {
   threshold: number;
   /** Marks smaller than this fraction of the image are treated as noise. */
   minMarkArea: number;
-  /** Hotspots grow by this fraction of the image before testing. Generosity. */
+  /** Hotspots grow by this fraction of the image before testing.
+   * Generous on purpose: CASES.md says a rough scribble anywhere near the
+   * thing should count, and frustration here loses the player forever. */
   pad: number;
   /** Separate marks closer than this (fraction of the long side) are merged. */
   mergeGap: number;
@@ -40,7 +57,7 @@ export const DEFAULTS: DetectOptions = {
   workSize: 512,
   threshold: 26,
   minMarkArea: 0.0004,
-  pad: 0.06,
+  pad: 0.07,
   mergeGap: 0.03,
   maxMarkArea: 0.55,
   maxTotalChanged: 0.6,
@@ -274,8 +291,21 @@ function mergeBlobs(blobs: Blob[], gap: number): Blob[] {
 /* hit testing                                                         */
 /* ------------------------------------------------------------------ */
 
+/**
+ * Grow a hotspot so a rough mark near it still counts — but never past the size
+ * of the thing itself.
+ *
+ * A flat pad is wrong because it is generous by the same absolute amount on a
+ * name written on a strip of tape and on a band across half the photo. The
+ * widest hotspot in Case 1 covered 15% of the frame; a flat 0.1 pad turned it
+ * into 37%, at which point a scribble almost anywhere in the middle of the image
+ * counted as finding it. Capping each axis at 60% of that axis keeps small
+ * targets forgiving and stops big ones swallowing the picture.
+ */
 function grow(rect: Rect, pad: number): Rect {
-  return [rect[0] - pad, rect[1] - pad, rect[2] + pad * 2, rect[3] + pad * 2];
+  const dx = Math.min(pad, rect[2] * 0.6);
+  const dy = Math.min(pad, rect[3] * 0.6);
+  return [rect[0] - dx, rect[1] - dy, rect[2] + dx * 2, rect[3] + dy * 2];
 }
 
 function contains(rect: Rect, px: number, py: number): boolean {

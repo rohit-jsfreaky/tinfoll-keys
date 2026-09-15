@@ -3,32 +3,42 @@
 /**
  * The camera rig. You stand in one place and turn your head — that is all.
  *
- * Deliberately NOT pointer lock. Pointer lock puts a "click to play" wall in
- * front of the first five seconds, and a judge with 90 seconds should not have
- * to get past a wall. Here the room starts moving the moment the mouse moves.
+ * The mouse is captured (pointer lock), so the OS cursor disappears and the only
+ * thing on screen is our own crosshair. Escape hands the mouse back; the browser
+ * does that itself and we only have to notice.
  *
- * On a touch screen there is no cursor, so you drag to look instead.
+ * Yaw is unlimited so you can turn the whole way round. Pitch is fenced in,
+ * because nobody needs to look through their own feet.
+ *
+ * A touch screen has no cursor and no pointer lock, so there you drag to look.
  */
 
 import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 
-/**
- * Free look. The full width of the screen maps to a full turn, so moving the
- * mouse to either edge puts the wall behind you in front of you — you can see
- * every corner of the room without ever clicking.
- */
-const MAX_YAW = Math.PI;
+/** How far you can look up and down, in radians. About 66 degrees. */
 const MAX_PITCH = 1.15;
 
-/** Seconds for the camera to catch up. Small = snappy, large = floaty. */
-const FOLLOW = 0.09;
+/** Radians per pixel of mouse movement. */
+const SENSITIVITY = 0.0022;
 
 /** Radians per pixel when dragging on a touch screen. */
-const DRAG_SPEED = 0.0035;
+const DRAG_SPEED = 0.004;
 
-export function LookRig({ frozen = false }: { frozen?: boolean }) {
+/** Seconds for the camera to catch up. Small = snappy, large = floaty. */
+const FOLLOW = 0.055;
+
+export interface LookRigProps {
+  /** Called whenever the mouse is captured or released. */
+  onLockChange?: (locked: boolean) => void;
+  /** Freeze the camera and release the mouse, for when a window is open. */
+  frozen?: boolean;
+}
+
+export function LookRig({ onLockChange, frozen = false }: LookRigProps) {
   const camera = useThree((s) => s.camera);
+  const canvas = useThree((s) => s.gl.domElement);
+
   const target = useRef({ yaw: 0, pitch: 0 });
   const current = useRef({ yaw: 0, pitch: 0 });
   const drag = useRef<{ id: number; x: number; y: number } | null>(null);
@@ -37,46 +47,60 @@ export function LookRig({ frozen = false }: { frozen?: boolean }) {
 
   useEffect(() => {
     const clamp = (v: number, max: number) => (v < -max ? -max : v > max ? max : v);
+    const isLocked = () => document.pointerLockElement === canvas;
 
-    const onPointerMove = (e: PointerEvent) => {
-      if (frozenRef.current) return;
+    // Clicking the room captures the mouse.
+    const onClick = () => {
+      if (!isLocked() && !frozenRef.current) void canvas.requestPointerLock();
+    };
+    const onLockStateChange = () => onLockChange?.(isLocked());
 
-      if (e.pointerType === "mouse") {
-        // Absolute: where the mouse sits on screen is where you are looking.
-        const nx = (e.clientX / window.innerWidth) * 2 - 1;
-        const ny = (e.clientY / window.innerHeight) * 2 - 1;
-        target.current.yaw = -nx * MAX_YAW;
-        target.current.pitch = -ny * MAX_PITCH;
-        return;
-      }
-
-      // Touch or pen: only turn while a finger is down, by how far it moved.
-      const d = drag.current;
-      if (!d || d.id !== e.pointerId) return;
-      target.current.yaw = clamp(target.current.yaw - (e.clientX - d.x) * DRAG_SPEED, MAX_YAW);
-      target.current.pitch = clamp(target.current.pitch - (e.clientY - d.y) * DRAG_SPEED, MAX_PITCH);
-      d.x = e.clientX;
-      d.y = e.clientY;
+    const onMouseMove = (e: MouseEvent) => {
+      if (!isLocked() || frozenRef.current) return;
+      // Free spin left and right; only up and down is fenced in.
+      target.current.yaw -= e.movementX * SENSITIVITY;
+      target.current.pitch = clamp(target.current.pitch - e.movementY * SENSITIVITY, MAX_PITCH);
     };
 
     const onPointerDown = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") drag.current = { id: e.pointerId, x: e.clientX, y: e.clientY };
     };
+    const onPointerMove = (e: PointerEvent) => {
+      if (frozenRef.current || e.pointerType === "mouse") return;
+      const d = drag.current;
+      if (!d || d.id !== e.pointerId) return;
+      target.current.yaw -= (e.clientX - d.x) * DRAG_SPEED;
+      target.current.pitch = clamp(target.current.pitch - (e.clientY - d.y) * DRAG_SPEED, MAX_PITCH);
+      d.x = e.clientX;
+      d.y = e.clientY;
+    };
     const onPointerUp = () => {
       drag.current = null;
     };
 
-    window.addEventListener("pointermove", onPointerMove, { passive: true });
+    canvas.addEventListener("click", onClick);
+    document.addEventListener("pointerlockchange", onLockStateChange);
+    document.addEventListener("mousemove", onMouseMove);
     window.addEventListener("pointerdown", onPointerDown, { passive: true });
+    window.addEventListener("pointermove", onPointerMove, { passive: true });
     window.addEventListener("pointerup", onPointerUp, { passive: true });
     window.addEventListener("pointercancel", onPointerUp, { passive: true });
+
     return () => {
-      window.removeEventListener("pointermove", onPointerMove);
+      canvas.removeEventListener("click", onClick);
+      document.removeEventListener("pointerlockchange", onLockStateChange);
+      document.removeEventListener("mousemove", onMouseMove);
       window.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("pointermove", onPointerMove);
       window.removeEventListener("pointerup", onPointerUp);
       window.removeEventListener("pointercancel", onPointerUp);
     };
-  }, []);
+  }, [canvas, onLockChange]);
+
+  // Hand the mouse back whenever a window opens over the room.
+  useEffect(() => {
+    if (frozen && document.pointerLockElement === canvas) document.exitPointerLock();
+  }, [frozen, canvas]);
 
   useFrame((state, dt) => {
     // Frame-rate independent smoothing, so it feels the same at 30fps and 144.
@@ -84,11 +108,11 @@ export function LookRig({ frozen = false }: { frozen?: boolean }) {
     current.current.yaw += (target.current.yaw - current.current.yaw) * k;
     current.current.pitch += (target.current.pitch - current.current.pitch) * k;
 
-    // A tiny amount of drift, so the room never feels locked to a tripod.
+    // A tiny amount of drift, so the room never feels bolted to a tripod.
     // Nobody notices this consciously. Everybody feels it.
     const t = state.clock.elapsedTime;
-    const swayY = Math.sin(t * 0.31) * 0.006 + Math.sin(t * 0.13) * 0.004;
-    const swayX = Math.sin(t * 0.24 + 1.7) * 0.004;
+    const swayY = Math.sin(t * 0.31) * 0.005 + Math.sin(t * 0.13) * 0.003;
+    const swayX = Math.sin(t * 0.24 + 1.7) * 0.003;
 
     camera.rotation.order = "YXZ";
     camera.rotation.y = current.current.yaw + swayY;

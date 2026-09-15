@@ -9,7 +9,7 @@
  * Run: node scripts/check-hotspots.mjs <case-id>
  */
 import sharp from "sharp";
-import { readFile, writeFile } from "node:fs/promises";
+import { access, readFile, writeFile } from "node:fs/promises";
 
 const caseId = process.argv[2] || "01";
 const file = JSON.parse(await readFile(`public/cases/${caseId}/case.json`, "utf8"));
@@ -20,7 +20,15 @@ const LABEL = 24;
 const PAD = 10;
 const COLS = 3;
 
-const withSpots = file.photos.filter((p) => p.hotspots.length);
+const exists = async (p) => access(p).then(() => true, () => false);
+
+const withSpots = [];
+const missing = [];
+for (const p of file.photos.filter((x) => x.hotspots.length)) {
+  if (await exists(`public/cases/${caseId}/${p.id}.jpg`)) withSpots.push(p);
+  else missing.push(p.id);
+}
+if (missing.length) console.log(`no photo yet, skipped: ${missing.join(", ")}`);
 const rows = Math.ceil(withSpots.length / COLS);
 const W = COLS * (CELL_W + PAD) + PAD;
 const H = rows * (CELL_H + LABEL + PAD) + PAD;

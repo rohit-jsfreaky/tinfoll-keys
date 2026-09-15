@@ -1,159 +1,418 @@
 {
-  "id": "01",
-  "title": "The Bait Shop That Never Opens",
-  "place": "Port Gellhorn",
-  "brief": "A bait shop at the Port Gellhorn marina. Closed since March. Nobody has bought a shiner there in six months. But the lights come on at night and the boat still goes out. I have been watching it for three weeks. Tell me I am crazy.",
-  "photos": [
+ "id": "01",
+ "title": "Nobody Tows A Clean Car",
+ "place": "Port Gellhorn",
+ "briefing": {
+  "title": "NOBODY TOWS A CLEAN CAR",
+  "blocks": [
+   {
+    "head": "ONE IN THE MORNING",
+    "body": "You're Mateo Ruiz. Twenty-two. Night driver at Sunstate Recovery. You're supposed to be asleep, but the guy upstairs just called you into his flat."
+   },
+   {
+    "head": "CAL'S BEEN WATCHING",
+    "body": "His name's Cal Hampton. He doesn't work much. He watches things. Most people think he's lost it. For three weeks, he's been taking photos of your tow yard from his balcony and from his car."
+   },
+   {
+    "head": "FOURTEEN PHOTOS",
+    "body": "Some of them look bad. Some of them are just a dog on a step, or some guy eating lunch. Cal kept those too. He doesn't know which ones matter yet."
+   },
+   {
+    "head": "HE THINKS HE FOUND IT",
+    "body": "Cal says Sunstate isn't recovering stolen cars. He says cars go in clean and come back out as something else. New plates. New papers. Gone. He's got enough to worry about, but not enough to prove it."
+   },
+   {
+    "head": "THAT'S WHY YOU'RE HERE",
+    "body": "He wants you to go through the photos. If something looks wrong, draw on it. If you're right, he'll tell you what he knows. If you're wrong, nothing happens. So try things."
+   },
+   {
+    "head": "PUT IT TOGETHER",
+    "body": "Pin the photos that matter to his board. Use the string if it helps. When you're done, Cal wants one sentence from you. Names included. That's the only part you can really get wrong."
+   },
+   {
+    "head": "ONE OF THEM",
+    "body": "There's an older man in a lot of Cal's photos. You know him well. Cal doesn't. And from where he's sitting, the guy looks bad."
+   }
+  ]
+ },
+ "brief": "A 24-hour tow yard behind a strip mall. Cars go in that nobody reported stolen and come out wearing somebody else's plate. Three weeks of photographs, and the man who turns up in most of them is the one you'd trust with your keys.",
+ "photos": [
+  {
+   "id": "twin-plates",
+   "src": "/cases/01/twin-plates.jpg",
+   "caption": "Row three. Look at the plates.",
+   "voice": "cal",
+   "role": "crime",
+   "hotspots": [
     {
-      "id": "boat-night",
-      "src": "/cases/01/boat-night.jpg",
-      "caption": "2:41am. Same boat. Every time.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "rod-holders",
-          "rect": [0.34, 0.45, 0.53, 0.15],
-          "clue": "Six rod holders. All empty. Nobody fishes with no rods."
-        },
-        {
-          "id": "waterline",
-          "rect": [0.28, 0.72, 0.58, 0.13],
-          "clue": "She is sitting low. That boat is carrying something heavy."
-        }
-      ]
+     "id": "same-plate",
+     "rect": [
+      0.68,
+      0.6,
+      0.15,
+      0.11
+     ],
+     "clue": "Same plate. Two different cars. Yeah, that's not normal.",
+     "hint": "Two cars nose to tail in the same row. Read the plate on the one nearest you, then read the plate on the one behind it."
     },
     {
-      "id": "ice-receipt",
-      "src": "/cases/01/ice-receipt.jpg",
-      "caption": "Found this on the seat. Did not go looking for it.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "ice-order",
-          "rect": [0.42, 0.43, 0.26, 0.14],
-          "clue": "Four hundred pounds of ice. Every week. For a shop that sells nothing."
-        }
-      ]
-    },
-    {
-      "id": "cooler-truck",
-      "src": "/cases/01/cooler-truck.jpg",
-      "caption": "Round the back. Three nights running.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "reefer-unit",
-          "rect": [0.63, 0.08, 0.33, 0.22],
-          "clue": "The truck is running its cooler. At a shop that has been shut since March."
-        }
-      ]
-    },
-    {
-      "id": "shop-cars",
-      "src": "/cases/01/shop-cars.jpg",
-      "caption": "Nobody at this marina drives cars like that.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "clean-cars",
-          "rect": [0.24, 0.45, 0.75, 0.38],
-          "clue": "Two cars nobody at this marina can afford, parked at a closed shop, at night."
-        }
-      ]
-    },
-    {
-      "id": "shop-closed",
-      "src": "/cases/01/shop-closed.jpg",
-      "caption": "Closed since March. Look past the glass.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "clean-floor",
-          "rect": [0.32, 0.56, 0.36, 0.35],
-          "clue": "That sign has not moved in months. But the floor inside is clean."
-        }
-      ]
-    },
-    {
-      "id": "fuel-log",
-      "src": "/cases/01/fuel-log.jpg",
-      "caption": "They leave it hanging right there on the post.",
-      "evidence": true,
-      "hotspots": [
-        {
-          "id": "night-fuelling",
-          "rect": [0.31, 0.43, 0.36, 0.11],
-          "clue": "Fuelled at 3:14 in the morning. Twice this week."
-        }
-      ]
-    },
-    {
-      "id": "pelican",
-      "src": "/cases/01/pelican.jpg",
-      "caption": "He is always there. I do not think he is involved.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "sunset",
-      "src": "/cases/01/sunset.jpg",
-      "caption": "Nice one, actually.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "parking-ticket",
-      "src": "/cases/01/parking-ticket.jpg",
-      "caption": "Somebody is having a worse week than me.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "lost-dog",
-      "src": "/cases/01/lost-dog.jpg",
-      "caption": "Been up since February. Hope they found him.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "jetski",
-      "src": "/cases/01/jetski.jpg",
-      "caption": "Has not moved in a month. Checked.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "fish-board",
-      "src": "/cases/01/fish-board.jpg",
-      "caption": "Somebody has been cleaning fish. Somebody.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "tourists",
-      "src": "/cases/01/tourists.jpg",
-      "caption": "Wrong dock, wrong day. Just people.",
-      "evidence": false,
-      "hotspots": []
-    },
-    {
-      "id": "storm",
-      "src": "/cases/01/storm.jpg",
-      "caption": "Blew in Thursday. Nothing went out that night.",
-      "evidence": false,
-      "hotspots": []
+     "id": "same-plate-far",
+     "rect": [
+      0.29,
+      0.51,
+      0.13,
+      0.1
+     ],
+     "clue": "Same plate. Two different cars. Yeah, that's not normal.",
+     "hint": "Two cars nose to tail in the same row. Read the plate on the one nearest you, then read the plate on the one behind it.",
+     "voiceAs": "same-plate"
     }
-  ],
-  "chain": [
-    "boat-night",
-    "ice-receipt",
-    "cooler-truck",
-    "shop-cars",
-    "shop-closed",
-    "fuel-log"
-  ],
-  "endings": {
-    "win": "The shop has not sold a shiner since March.\n\nThe boat goes out empty and comes back heavy. The ice was never for fish — it was for keeping something cold on a truck heading north on the 27.\n\nCoast Guard stopped it outside Grassrivers on a Tuesday.\n\nYou were right, Cal. You are usually right. That is the problem.",
-    "lost": "You put it on the pelican.\n\nThe marina laughed. The Coast Guard stopped taking your calls. The truck ran that route for another two years, and the shop never opened once.\n\nNobody listens to the guy who cried bird."
+   ]
+  },
+  {
+   "id": "stripped-car",
+   "src": "/cases/01/stripped-car.jpg",
+   "caption": "Tuesday it had a plate. Thursday it didn't.",
+   "voice": "cal",
+   "role": "crime",
+   "hotspots": [
+    {
+     "id": "no-plate",
+     "rect": [
+      0.5,
+      0.41,
+      0.27,
+      0.16
+     ],
+     "clue": "Plate's gone. Badges too. That SUV came in with both.",
+     "hint": "The silver SUV in the middle of the row. Look at where its number plate is supposed to be."
+    }
+   ]
+  },
+  {
+   "id": "plate-stack",
+   "src": "/cases/01/plate-stack.jpg",
+   "caption": "Office door was open. I didn't go in.",
+   "voice": "cal",
+   "role": "crime",
+   "hotspots": [
+    {
+     "id": "dealer-plates",
+     "rect": [
+      0.7,
+      0.21,
+      0.18,
+      0.26
+     ],
+     "clue": "A tow yard doesn't need a stack of dealer plates.",
+     "hint": "Through the open door of the office trailer, hanging on the wall inside. Count them."
+    }
+   ]
+  },
+  {
+   "id": "cut-vin",
+   "src": "/cases/01/cut-vin.jpg",
+   "caption": "There's supposed to be a number there.",
+   "voice": "mateo",
+   "role": "crime",
+   "hotspots": [
+    {
+     "id": "cut-vin",
+     "rect": [
+      0.23,
+      0.57,
+      0.56,
+      0.22
+     ],
+     "clue": "Somebody cut the VIN plate out of the dash. That wasn't from a tow.",
+     "hint": "The corner of the dashboard, down at the bottom of the windscreen. Something's been taken out of it."
+    }
+   ]
+  },
+  {
+   "id": "container",
+   "src": "/cases/01/container.jpg",
+   "caption": "Back fence. They keep it shut most nights.",
+   "voice": "cal",
+   "role": "crime",
+   "hotspots": [
+    {
+     "id": "container-car",
+     "rect": [
+      0.45,
+      0.38,
+      0.2,
+      0.17
+     ],
+     "clue": "There's a supercar in that container. That's not where impounds go.",
+     "hint": "The rusted shipping container at the back fence. The doors aren't shut properly."
+    }
+   ]
+  },
+  {
+   "id": "night-tow",
+   "src": "/cases/01/night-tow.jpg",
+   "caption": "Three in the morning. Every time.",
+   "voice": "cal",
+   "role": "crime",
+   "hotspots": [
+    {
+     "id": "clean-car",
+     "rect": [
+      0.4,
+      0.26,
+      0.34,
+      0.22
+     ],
+     "clue": "Not a scratch on it. So why's it on a flatbed at three in the morning?",
+     "hint": "The car up on the back of the flatbed. Look at the bodywork, not the truck."
+    }
+   ]
+  },
+  {
+   "id": "luis-night",
+   "src": "/cases/01/luis-night.jpg",
+   "caption": "That's Luis. He taught me to run the flatbed.",
+   "voice": "mateo",
+   "role": "turn",
+   "hotspots": [
+    {
+     "id": "luis",
+     "rect": [
+      0.46,
+      0.38,
+      0.22,
+      0.26
+     ],
+     "clue": "Luis Ortega. Fifteen years at Sunstate.",
+     "hint": "The man crouched down at the back of a car. Look at what he's holding."
+    }
+   ]
+  },
+  {
+   "id": "sofia-flyer",
+   "src": "/cases/01/sofia-flyer.jpg",
+   "caption": "Luis put these up all over Gellhorn. Nobody called.",
+   "voice": "mateo",
+   "role": "turn",
+   "hotspots": [
+    {
+     "id": "sofia-car",
+     "rect": [
+      0.65,
+      0.24,
+      0.12,
+      0.16
+     ],
+     "clue": "Sofia Ortega's car. Stolen in March. Never recovered.",
+     "hint": "The poster taped to the concrete pole. Look inside the car in the photograph, hanging off the mirror."
+    }
+   ]
+  },
+  {
+   "id": "flamingo-car",
+   "src": "/cases/01/flamingo-car.jpg",
+   "caption": "Sofia put that stupid flamingo in every car she ever owned.",
+   "voice": "mateo",
+   "role": "turn",
+   "hotspots": [
+    {
+     "id": "same-flamingo",
+     "rect": [
+      0.45,
+      0.35,
+      0.13,
+      0.15
+     ],
+     "clue": "Same pink flamingo. Same car. Different plate. It's been sitting in the yard.",
+     "hint": "The little blue hatchback. Look through its windscreen, at the mirror."
+    }
+   ]
+  },
+  {
+   "id": "luis-notebook",
+   "src": "/cases/01/luis-notebook.jpg",
+   "caption": "That's not a run sheet.",
+   "voice": "cal",
+   "role": "turn",
+   "hotspots": [
+    {
+     "id": "notebook",
+     "rect": [
+      0.72,
+      0.58,
+      0.26,
+      0.32
+     ],
+     "clue": "Dates, times, plate numbers. Luis has been writing it all down.",
+     "hint": "Through the open door on the right. The book lying open on the bench."
+    }
+   ]
+  },
+  {
+   "id": "locker-search",
+   "src": "/cases/01/locker-search.jpg",
+   "caption": "They did that after he went home.",
+   "voice": "cal",
+   "role": "turn",
+   "hotspots": [
+    {
+     "id": "ortega-locker",
+     "rect": [
+      0.36,
+      0.27,
+      0.13,
+      0.12
+     ],
+     "clue": "That's Luis's locker. They're searching it right after he leaves.",
+     "hint": "The locker the two of them have got open. There's a name written on the door."
+    }
+   ]
+  },
+  {
+   "id": "yard-dog",
+   "src": "/cases/01/yard-dog.jpg",
+   "caption": "Bruno. Luis feeds him every shift. Victor keeps saying he'll get rid of him.",
+   "voice": "mateo",
+   "role": "context",
+   "hotspots": []
+  },
+  {
+   "id": "day-yard",
+   "src": "/cases/01/day-yard.jpg",
+   "caption": "It's just a yard in the daytime. People come and get their cars back.",
+   "voice": "mateo",
+   "role": "context",
+   "hotspots": []
+  },
+  {
+   "id": "luis-lunch",
+   "src": "/cases/01/luis-lunch.jpg",
+   "caption": "He eats round the back so he doesn't have to talk to Victor.",
+   "voice": "mateo",
+   "role": "context",
+   "hotspots": []
   }
+ ],
+ "required": [
+  "luis",
+  "sofia-car",
+  "same-flamingo",
+  "notebook",
+  "ortega-locker"
+ ],
+ "accusation": {
+  "lead": "Alright. Say it properly. Once you put a name on this, you don't get to pretend you didn't.",
+  "template": "{who} is using Sunstate Recovery to {crime}. Luis Ortega is {role} because he found {thing}.",
+  "slots": [
+   {
+    "id": "who",
+    "question": "Who's running it?",
+    "answer": "victor",
+    "options": [
+     {
+      "id": "victor",
+      "text": "VICTOR SALAZAR"
+     },
+     {
+      "id": "luis",
+      "text": "LUIS ORTEGA"
+     }
+    ]
+   },
+   {
+    "id": "crime",
+    "question": "What's the yard actually for?",
+    "answer": "clone",
+    "options": [
+     {
+      "id": "clone",
+      "text": "STEAL AND CLONE CARS"
+     },
+     {
+      "id": "insurance",
+      "text": "RUN AN INSURANCE SCAM"
+     },
+     {
+      "id": "impound",
+      "text": "SELL OFF IMPOUNDED CARS"
+     }
+    ]
+   },
+   {
+    "id": "role",
+    "question": "And Luis?",
+    "answer": "investigating",
+    "options": [
+     {
+      "id": "investigating",
+      "text": "INVESTIGATING VICTOR"
+     },
+     {
+      "id": "partner",
+      "text": "VICTOR'S PARTNER"
+     },
+     {
+      "id": "thief",
+      "text": "STEALING CARS HIMSELF"
+     }
+    ]
+   },
+   {
+    "id": "thing",
+    "question": "Because he found what?",
+    "answer": "sofia",
+    "options": [
+     {
+      "id": "sofia",
+      "text": "SOFIA'S STOLEN CAR"
+     },
+     {
+      "id": "cash",
+      "text": "A BAG OF CASH"
+     },
+     {
+      "id": "tracker",
+      "text": "A POLICE TRACKER"
+     }
+    ]
+   }
+  ]
+ },
+ "endings": {
+  "win": "They got Victor in the office trailer with a drawer full of plates. Luis gave his statement first, so they treated him like a witness. Sofia's car's in evidence now. She'll get it back. We had the yard right. We nearly had Luis wrong.",
+  "lost": "You put Luis next to Victor and that was enough. They picked them both up that night. Luis had spent months writing down plates because nobody believed him. Now his name's tied to Victor's, and Sofia's car is still sitting in evidence."
+ },
+ "story": [
+  {
+   "title": "COME UP, I WANT TO SHOW YOU SOMETHING",
+   "body": [
+    "You work there, Mateo. That's why you're in my flat at one in the morning. I can see most of the yard from here, and the rest from my car. I'm not asking you to believe me. Just look."
+   ]
+  },
+  {
+   "title": "WHAT I THINK IS HAPPENING",
+   "body": [
+    "A tow yard's where stolen cars are supposed to end up. I think this one sends them back out. Cars come in clean, then leave with new plates and new papers. I can't prove it. You know that yard better than I do."
+   ]
+  },
+  {
+   "title": "WHAT TO LOOK FOR",
+   "body": [
+    "I'm not telling you what to circle. That'd be useless. Look for stuff that doesn't fit. Same plate twice. A clean car on a tow truck. Dealer plates in a tow yard. Most of the photos are normal. Good. That makes the bad ones easier to spot."
+   ]
+  },
+  {
+   "title": "THERE'S A MAN IN A LOT OF THESE",
+   "body": [
+    "There's an older guy in the grey shirt. He's around every time those cars move at night. I don't know him. You do. So you tell me what he's doing."
+   ]
+  },
+  {
+   "title": "THE BOX",
+   "body": [
+    "Fourteen photos. Open one, circle what looks wrong, then save it. If you're right, I'll tell you what I know. Pin the ones that matter. Use the string if it helps. When you're done, make one accusation. One sentence. Names included."
+   ]
+  }
+ ]
 }

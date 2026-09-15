@@ -16,10 +16,33 @@
 import { useTexture } from "@react-three/drei";
 import * as THREE from "three";
 import { BOTTLE, PH, SK, WARDROBE_FBX } from "./models";
+import { Interactive } from "./interaction";
 import { FbxProp, Prop, PropPart } from "./prop";
 
 const PAPER = "#efe7d8";
 const METAL = "#2b2f2c";
+
+/**
+ * The sliding door ships its glass at 25% opacity, which is a dark tint, not a
+ * window. Thin it right out so the city behind it actually shows through.
+ */
+function clearTheGlass(root: THREE.Object3D) {
+  root.traverse((o) => {
+    const mesh = o as THREE.Mesh;
+    if (!mesh.isMesh) return;
+    const mats = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    mats.forEach((m, i) => {
+      if (m.name !== "Window_Mat") return;
+      const glass = m.clone() as THREE.MeshStandardMaterial;
+      glass.transparent = true;
+      glass.opacity = 0.1;
+      glass.depthWrite = false;
+      glass.roughness = 0.05;
+      if (Array.isArray(mesh.material)) mesh.material[i] = glass;
+      else mesh.material = glass;
+    });
+  });
+}
 
 /** Heights of the surfaces things stand on. */
 export const TV_STAND_TOP = 1.07;
@@ -32,10 +55,25 @@ const COFFEE_TABLE_TOP = 0.42;
 
 /**
  * A cheap LED strip in an aluminium channel along the top of a side wall.
- * Left runs cold, right runs pink — strip lights are never truly white, and it
- * puts the palette into the room at the top of frame.
+ * Left runs cyan, right runs magenta — this is where the room gets its colour.
+ *
+ * The bar and the light it throws are deliberately NOT the same colour. The bar
+ * is the full neon, because you look straight at it and it should read as a tube
+ * of gas. The wash is a lighter tint of the same hue: a fully saturated light at
+ * this intensity floods every surface it touches and you lose the texture of the
+ * wall, the cork and the furniture underneath it.
  */
-function WallStrip({ side, colour }: { side: -1 | 1; colour: string }) {
+function WallStrip({
+  side,
+  colour,
+  wash,
+}: {
+  side: -1 | 1;
+  /** The tube itself. Full strength. */
+  colour: string;
+  /** What it throws on the wall. Same hue, backed off. */
+  wash: string;
+}) {
   const LEN = 4.6;
   return (
     <group position={[side * 3.45, 2.82, -0.7]}>
@@ -47,16 +85,9 @@ function WallStrip({ side, colour }: { side: -1 | 1; colour: string }) {
         <boxGeometry args={[0.04, 0.05, LEN - 0.08]} />
         <meshBasicMaterial color={colour} toneMapped={false} />
       </mesh>
-      {[-1.6, 0, 1.6].map((z) => (
-        <pointLight
-          key={z}
-          position={[side * -0.25, -0.08, z]}
-          intensity={11}
-          distance={8}
-          decay={1.7}
-          color={colour}
-        />
-      ))}
+      {/* One lamp per strip, not three. The glowing bar above does the
+        * visual work for free; the lamp only has to wash the wall. */}
+      <pointLight position={[side * -0.3, -0.1, 0]} intensity={17} distance={8} decay={1.9} color={wash} />
     </group>
   );
 }
@@ -64,8 +95,8 @@ function WallStrip({ side, colour }: { side: -1 | 1; colour: string }) {
 export function WallStrips() {
   return (
     <>
-      <WallStrip side={-1} colour="#d6f6ff" />
-      <WallStrip side={1} colour="#ffd9e8" />
+      <WallStrip side={-1} colour="#2fc9f0" wash="#8fe9fb" />
+      <WallStrip side={1} colour="#ff2f9e" wash="#ff88c4" />
     </>
   );
 }
@@ -155,12 +186,22 @@ function WallPapers() {
 /* the room                                                            */
 /* ------------------------------------------------------------------ */
 
-export function RoomProps() {
+/**
+ * The room, in three tiers.
+ *
+ * Tier 1 is the wall you are facing when the game opens. Tier 2 is the rest of
+ * the furniture. Tier 3 is the clutter that sells it. Mounting them in waves is
+ * what stops 41 models downloading and uploading to the GPU all at once, which
+ * is what made the first few seconds stutter.
+ */
+export function RoomProps({ onOpenBox, tier = 3 }: { onOpenBox: () => void; tier?: number }) {
   return (
     <>
       {/* ---------------- back wall: the working end ---------------- */}
       <Prop url={SK.tvStand} position={[0, 0, 0]} wall="back" fitLongest={2.1} />
-      <Prop url={PH.box} position={[0.72, TV_STAND_TOP, -3.02]} rotation={[0, -0.35, 0]} />
+      <Interactive id="photo-box" label="OPEN THE BOX" onSelect={onOpenBox}>
+        <Prop url={PH.box} position={[0.72, TV_STAND_TOP, -3.02]} rotation={[0, -0.35, 0]} />
+      </Interactive>
       <Prop url={SK.camera} position={[0.2, TV_STAND_TOP, -3.02]} rotation={[0, 0.5, 0]} fitLongest={0.15} />
       <Prop url={SK.mug} position={[-0.3, TV_STAND_TOP, -2.98]} />
       <Prop url={PH.deskLamp} position={[0.95, TV_STAND_TOP, -3.05]} rotation={[0, -0.7, 0]} />
@@ -173,6 +214,8 @@ export function RoomProps() {
       />
       {/* <Prop url={SK.plantTall} position={[-2.75, 0, 0]} wall="back" fitHeight={1.5} /> */}
       
+      {tier < 2 ? null : (
+      <>
       {/* ---------------- left wall, back to front ----------------
         * Each piece sits flush to the wall with a real gap between it and the
         * next, the way you would actually push furniture around a room. */}
@@ -191,7 +234,14 @@ export function RoomProps() {
       <Prop url={SK.bin} position={[-3.15, 0, 1.35]} fitHeight={0.55} />
       <Prop url={SK.laundryBasket} position={[-2, 0, -3.2]} rotation={[0, 0.1, 0]} fitLongest={0.6} />
 
-      <Prop url={SK.slidingDoor} position={[0, 0, -0.6]} rotation={[0, -Math.PI / 2, 0]} wall="right" fitHeight={2.5} />
+      <Prop
+        url={SK.slidingDoor}
+        position={[0, 0, -0.6]}
+        rotation={[0, -Math.PI / 2, 0]}
+        wall="right"
+        fitHeight={2.5}
+        tweak={clearTheGlass}
+      />
       <Prop url={SK.railing} position={[4.4, 0, -0.6]} rotation={[-Math.PI / 2, 0, -Math.PI / 2]} fitLongest={3.0} />
       <Prop url={PH.balconyChair} position={[4.05, 0, 0.5]} rotation={[0, -1.1, 0]} />
 
@@ -205,6 +255,11 @@ export function RoomProps() {
       <Prop url={SK.plantSmall} position={[3.2, 0, -1.9]} />
       <Prop url={SK.skateboard} position={[2.8, 0, -3.2]} rotation={[0, 1.5, 0]} />
 
+      </>
+      )}
+
+      {tier < 3 ? null : (
+      <>
       <Prop url={SK.rug} position={[1.45, 0.006, 0.5]} rotation={[0, 0.06, 0]} fitLongest={3.0} />
       <Prop url={SK.sofa} position={[2.05, 0, 0.55]} rotation={[0, -Math.PI / 2, 0]} />
       <Prop url={SK.blanket} position={[2.15, 0.5, 0.95]} rotation={[0, -1.2, 0]} fitLongest={1.0} />
@@ -216,6 +271,9 @@ export function RoomProps() {
       <Prop url={SK.sodaCans} position={[1.02, COFFEE_TABLE_TOP, 0.32]} rotation={[0, 0.2, 0]} fitLongest={0.3} />
       <Prop url={SK.pizzaBox} position={[0.9, COFFEE_TABLE_TOP, 1]} rotation={[-Math.PI / 2, 0, 0.5]} fitLongest={0.4} />
 
+
+      </>
+      )}
 
       <Prop url={PH.fan} position={[0.2, 3.08, -1.1]} anchor="top" spinY={2.6} /> 
 

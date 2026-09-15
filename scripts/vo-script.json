@@ -1,0 +1,37 @@
+{
+  "_comment": "Cal's script, written by ChatGPT against a brief of: plain, blunt, Rockstar, no poetry, no hard words, and emotion tags only where one genuinely earns its place. My own draft was too written — too many tags, too much rhythm — and this replaced it wholesale. These strings are the source of truth for BOTH the spoken lines and the text on screen; build-case.py strips the tags for the screen so the paper and the voice never disagree.",
+  "lines": {
+    "intro": "[tired] I'm Cal. I live upstairs. I've been watching that yard for three weeks. Nobody asked me to. That's why I noticed it. Start with the file on the wall.",
+
+    "story-1": "You work there, Mateo. That's why you're in my flat at one in the morning. I can see most of the yard from here, and the rest from my car. I'm not asking you to believe me. Just look.",
+    "story-2": "A tow yard's where stolen cars are supposed to end up. I think this one sends them back out. Cars come in clean, then leave with new plates and new papers. I can't prove it. You know that yard better than I do.",
+    "story-3": "I'm not telling you what to circle. That'd be useless. Look for stuff that doesn't fit. Same plate twice. A clean car on a tow truck. Dealer plates in a tow yard. Most of the photos are normal. Good. That makes the bad ones easier to spot.",
+    "story-4": "There's an older guy in the grey shirt. He's around every time those cars move at night. I don't know him. You do. So you tell me what he's doing.",
+    "story-5": "Fourteen photos. Open one, circle what looks wrong, then save it. If you're right, I'll tell you what I know. Pin the ones that matter. Use the string if it helps. When you're done, make one accusation. One sentence. Names included.",
+
+    "clue-same-plate": "Same plate. Two different cars. Yeah, that's not normal.",
+    "clue-no-plate": "Plate's gone. Badges too. That SUV came in with both.",
+    "clue-dealer-plates": "A tow yard doesn't need a stack of dealer plates.",
+    "clue-cut-vin": "Somebody cut the VIN plate out of the dash. That wasn't from a tow.",
+    "clue-container-car": "There's a supercar in that container. That's not where impounds go.",
+    "clue-clean-car": "Not a scratch on it. So why's it on a flatbed at three in the morning?",
+    "clue-luis": "Luis Ortega. Fifteen years at Sunstate.",
+    "clue-sofia-car": "Sofia Ortega's car. Stolen in March. Never recovered.",
+    "clue-same-flamingo": "Same pink flamingo. Same car. Different plate. It's been sitting in the yard.",
+    "clue-notebook": "Dates, times, plate numbers. Luis has been writing it all down.",
+    "clue-ortega-locker": "That's Luis's locker. They're searching it right after he leaves.",
+
+    "win": "They got Victor in the office trailer with a drawer full of plates. Luis gave his statement first, so they treated him like a witness. Sofia's car's in evidence now. She'll get it back. We had the yard right. We nearly had Luis wrong.",
+    "lost": "You put Luis next to Victor and that was enough. They picked them both up that night. Luis had spent months writing down plates because nobody believed him. Now his name's tied to Victor's, and Sofia's car is still sitting in evidence.",
+
+    "yard-dirty": "[frustrated] Alright. The yard's dirty. We know that. I'm worried about the guy in the grey shirt.",
+    "not-yet": "Not yet. There's still somebody in these photos I can't place. I'm not putting a name on this until you can.",
+    "accuse-lead": "Alright. Say it properly. Once you put a name on this, you don't get to pretend you didn't.",
+    "accuse-short": "[frustrated] No. Something in that doesn't hold up. Go back and look again.",
+
+    "miss-1": "Nothing there. Try again, you lose nothing.",
+    "miss-2": "Not that. Keep looking.",
+    "pin-1": "Okay. Put it up.",
+    "pin-2": "Yeah. That one stays."
+  }
+}
